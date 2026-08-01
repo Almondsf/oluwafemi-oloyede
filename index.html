@@ -90,10 +90,10 @@
           <span class="tag-live">production · elsoft limited</span>
         </div>
         <p class="what">real estate and property rental marketplace.</p>
-        <p>reporting and moderation module — report-agent and report-renter
-        endpoints, a dedicated UserReport model, enum-backed allow-lists so a
-        report reason can only ever be one of a known set. also extended the
-        profile update endpoint to handle profile pictures and business names.</p>
+        <p>built the reporting and moderation module: report-agent and
+        report-renter endpoints over a dedicated UserReport model, with report
+        reasons constrained to an enum-backed allow-list. extended the profile
+        update endpoint to accept profile pictures and business names.</p>
         <ul class="stack">
           <li>fastapi</li><li>sqlmodel</li><li>postgres</li>
         </ul>
@@ -105,14 +105,14 @@
           <span class="tag-live">live</span>
         </div>
         <p class="what">paint colour visualiser. photograph a room, repaint the walls.</p>
-        <p>started as a fastapi service, then the whole pipeline moved into the
-        browser — segformer runs through onnx via transformers.js, webgpu when the
-        adapter actually works and wasm when it doesn't, so the photo never leaves
-        the device. the hard part is that a per-pixel classifier returns a ragged
-        mask: opencv's morphology, connected components and douglas-peucker are
-        ported to typed arrays so wall edges come out straight. recolouring
-        rescales brightness against the paint's own lightness rather than
-        replacing it, which is what keeps the room's real shadows.</p>
+        <p>semantic segmentation running entirely client-side: segformer executes
+        in-browser through onnx runtime via transformers.js, on webgpu where an
+        adapter is available and wasm otherwise, so images are never uploaded.
+        mask post-processing — morphological open and close, connected-component
+        filtering, douglas-peucker contour simplification — is implemented against
+        typed arrays. recolouring applies the target hue and saturation while
+        rescaling luminance against the region mean, preserving the original
+        shading.</p>
         <ul class="stack">
           <li>typescript</li><li>react</li><li>transformers.js</li><li>onnx runtime</li><li>webgpu</li><li>vite</li>
         </ul>
@@ -125,10 +125,10 @@
           <h3>swiftride</h3>
         </div>
         <p class="what">ride-hailing backend.</p>
-        <p>the hard part is the ride lifecycle state machine — every transition
-        is guarded, so a ride cannot be completed before it starts or paid for
-        twice. also real-time driver location over websockets, celery for
-        background work, paystack payments, github actions ci/cd.</p>
+        <p>the ride lifecycle is modelled as an explicit state machine with
+        guarded transitions, so a ride cannot complete before it starts or settle
+        twice. driver location streams over websockets, celery runs background
+        work, paystack handles payments, and github actions covers ci/cd.</p>
         <ul class="stack">
           <li>django rest framework</li><li>channels</li><li>celery</li><li>redis</li><li>paystack</li>
         </ul>
@@ -140,9 +140,9 @@
           <h3>substacky</h3>
         </div>
         <p class="what">multi-tenant saas subscription management api.</p>
-        <p>the hard part is webhook correctness — hmac signature verification
-        on every paystack callback plus idempotency keys, so a retried webhook
-        never double-charges a tenant. role-based permissions scoped per tenant.</p>
+        <p>every paystack callback is verified by hmac signature and deduplicated
+        against an idempotency key, so a retried webhook cannot double-charge a
+        tenant. permissions are role-based and scoped per tenant.</p>
         <ul class="stack">
           <li>django rest framework</li><li>postgres</li><li>paystack</li>
         </ul>
@@ -154,9 +154,9 @@
           <h3>confr</h3>
         </div>
         <p class="what">web conferencing backend.</p>
-        <p>the hard part is targeted webrtc signaling over django channels —
-        routing offers and answers to specific peers rather than broadcasting
-        to the room. jwt-authenticated websocket connections and host controls.</p>
+        <p>webrtc signalling over django channels, routing offers and answers to
+        specific peers rather than broadcasting them room-wide. websocket
+        connections authenticate by jwt, with host-level session controls.</p>
         <ul class="stack">
           <li>django channels</li><li>websockets</li><li>redis</li><li>docker</li><li>render</li>
         </ul>
