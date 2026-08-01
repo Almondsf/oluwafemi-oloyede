@@ -101,6 +101,27 @@
 
       <article class="project">
         <div class="project-head">
+          <h3>wallcast</h3>
+          <span class="tag-live">live</span>
+        </div>
+        <p class="what">paint colour visualiser. photograph a room, repaint the walls.</p>
+        <p>started as a fastapi service, then the whole pipeline moved into the
+        browser — segformer runs through onnx via transformers.js, webgpu when the
+        adapter actually works and wasm when it doesn't, so the photo never leaves
+        the device. the hard part is that a per-pixel classifier returns a ragged
+        mask: opencv's morphology, connected components and douglas-peucker are
+        ported to typed arrays so wall edges come out straight. recolouring
+        rescales brightness against the paint's own lightness rather than
+        replacing it, which is what keeps the room's real shadows.</p>
+        <ul class="stack">
+          <li>typescript</li><li>react</li><li>transformers.js</li><li>onnx runtime</li><li>webgpu</li><li>vite</li>
+        </ul>
+        <a class="repo-link" href="https://wallcast.netlify.app" target="_blank" rel="noopener">live demo →</a>
+        <a class="repo-link" href="https://github.com/Almondsf/wallcast" target="_blank" rel="noopener">view repo →</a>
+      </article>
+
+      <article class="project">
+        <div class="project-head">
           <h3>swiftride</h3>
         </div>
         <p class="what">ride-hailing backend.</p>
@@ -153,10 +174,6 @@
           <span class="name">storagedrive</span> — cloud file management api.
           recursive folder trees, sharing permissions, drf-spectacular docs.
           <a href="https://github.com/Almondsf/storage_drive" target="_blank" rel="noopener">github.com/Almondsf/storage_drive</a>
-        </li>
-        <li>
-          <span class="name">wallcast</span> — paint colour visualiser api.
-          <a href="https://github.com/Almondsf/wallcast" target="_blank" rel="noopener">github.com/Almondsf/wallcast</a>
         </li>
       </ul>
     </div>

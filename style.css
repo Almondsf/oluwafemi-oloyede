@@ -262,6 +262,10 @@ section h2::after {
   font-size: 13px;
 }
 
+.repo-link + .repo-link {
+  margin-left: 20px;
+}
+
 .also-built-heading {
   font-size: 15px;
   color: var(--text-dim);
